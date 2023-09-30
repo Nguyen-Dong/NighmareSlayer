@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     bool rollOnce = false;
 
 
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
     public Animator animator;
 
-    public SpriteRenderer characterSR;
+    //public SpriteRenderer characterSR;
 
     public Vector3 moveInput;
 
@@ -53,9 +53,9 @@ public class Player : MonoBehaviour
 
         if (moveInput.x != 0)
             if (moveInput.x > 0)
-                characterSR.transform.localScale = new Vector3(1, 1, 0);
+                transform.localScale = new Vector3(1, 1, 0);
             else
-                characterSR.transform.localScale = new Vector3(-1, 1, 0);
+                transform.localScale = new Vector3(-1, 1, 0);
     }
 }
  
