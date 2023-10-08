@@ -6,12 +6,18 @@ using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
-    public Image fillBar;
-    public TextMeshProUGUI valueText;
+    public TextMeshProUGUI healthText;
+    public Image bar;
 
-    public void UpdateBar(int currentValue, int maxValue)
+    public void UpdateHealth(int health, int maxHealth)
     {
-        fillBar.fillAmount = (float)currentValue / (float)maxValue;
-        valueText.text = currentValue.ToString() + " / " + maxValue.ToString();
+        healthText.text = health.ToString() + " / " + maxHealth.ToString();
+        bar.fillAmount = (float)health / (float)maxHealth;
+    }
+
+    public void UpdateBar(int value, int maxValue, string text)
+    {
+        healthText.text = text;
+        bar.fillAmount = (float)value / (float)maxValue;
     }
 }
