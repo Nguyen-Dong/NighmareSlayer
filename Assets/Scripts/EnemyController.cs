@@ -1,33 +1,43 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    Player playerS;
-    public int minDamage;
-    public int maxDamage;
+    public GameObject damPopUp; 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            playerS = collision.GetComponent<Player>();
-            InvokeRepeating("DamagePlayer", 0, 0.1f);
-        }
-    }
+    Health health;
+    //ColoredFlash flash;
 
-    private void OnTriggerExit2D(Collider2D collision)
+
+    private void Start()
     {
-        if (collision.CompareTag("Player"))
-        {
-            playerS = null;
-            CancelInvoke("DamagePlayer");
-        }
+        health = GetComponent<Health>();
+        //flash = GetComponent<ColoredFlash>();
     }
-    void DamagePlayer()
+    public void TakeDamEffect(int damage)
     {
-        int damage = UnityEngine.Random.Range(minDamage, maxDamage);
-        //playerS.TakeDamage(damage);
+        if (damPopUp != null)
+        {
+            GameObject instance = Instantiate(damPopUp, transform.position
+                    + new Vector3(UnityEngine.Random.Range(-0.3f, 0.3f), 0.5f, 0), Quaternion.identity);
+            instance.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
+            Animator animator = instance.GetComponentInChildren<Animator>();
+            if (damage <= 10) animator.Play("normal");
+            else animator.Play("critical");
+        }
+
+        // Flash
+        /*if (flash != null)
+        {
+            flash.Flash(Color.white);
+        }*/
+        // Freeze
+        /*if (enemyAI != null)
+        {
+            enemyAI.FreezeEnemy();
+        }*/
     }
 }

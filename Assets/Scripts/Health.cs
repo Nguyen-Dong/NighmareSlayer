@@ -35,9 +35,9 @@ public class Health : MonoBehaviour
                 currentHealth = 0;
                 if (this.gameObject.tag == "Enemy")
                 {
-                    //FindObjectOfType<WeaponManager>().RemoveEnemyToFireRange(this.transform);
-                    //FindObjectOfType<Killed>().UpdateKilled();
-                    //FindObjectOfType<PlayerExp>().UpdateExperience(UnityEngine.Random.Range(1, 4));
+                    FindObjectOfType<WeaponManager>().RemoveEnemyToFireRange(this.transform);
+                    FindObjectOfType<Killed>().UpdateKilled();
+                    FindObjectOfType<PlayerExp>().UpdateExperience(UnityEngine.Random.Range(1, 5));
                     Destroy(this.gameObject, 0.125f);
                 }
                 isDead = true;

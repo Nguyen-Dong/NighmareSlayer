@@ -4,45 +4,73 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject bullet;
-    public Transform firePos;
-    public float TimeBtwFire = 0.2f;
+    public GameObject projectile;
+    public GameObject muzzle;
+    public Transform[] spawnPos;
+    private float timeBtwShots;
+    public float startTimeBtwShots;
     public float bulletForce;
+    public int minDamage = 6;
+    public int maxDamage = 16;
 
-    private float timeBtwFire;
-    void Update()
+    // Effect Part 10
+    public GameObject fireEffect;
+
+    public WeaponManager weaponManager;
+    public Transform calculatePoint;
+
+   
+
+    private void Start()
     {
-        RotateGun();
-        timeBtwFire -= Time.deltaTime; 
+        weaponManager = FindObjectOfType<WeaponManager>();
+    }
 
-        if (Input.GetMouseButton(0) && timeBtwFire < 0)
+    private void Update()
+    {
+        //UPDATE
+        timeBtwShots -= Time.deltaTime;
+        if (timeBtwShots <= 0)
         {
-            FireBullet(); 
+            Transform enemy = weaponManager.FindNearestEnemy(calculatePoint.position);
+            if (enemy != null)
+            {
+                RotateGun(enemy.position);
+                Fire();
+            }
         }
     }
 
-    void RotateGun()
+    void RotateGun(Vector3 pos)
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 lookDir = mousePos - transform.position;
+        Vector2 lookDir = pos - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = rotation;
 
-        if (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270)
-            transform.localScale = new Vector3(1, -1, 0);
-        else
-            transform.localScale = new Vector3(1, 1, 0);
+        if (transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270) transform.localScale = new Vector3(1, -1, 0);
+        else transform.localScale = new Vector3(1, 1, 0);
     }
-    void FireBullet()
+
+    void Fire()
     {
-        timeBtwFire = TimeBtwFire;
+        // For is for auto fire part
+        foreach (Transform spanw in spawnPos)
+        {
+            Instantiate(muzzle, spanw.position, transform.rotation, transform);
+            var bullet = Instantiate(projectile, spanw.position, Quaternion.identity);
+            Bullet bulletC = bullet.GetComponent<Bullet>();
+            bulletC.minDamage = minDamage;
+            bulletC.maxDamage = maxDamage;
 
-        GameObject bulletTmp = Instantiate(bullet, firePos.position, Quaternion.identity);
+            timeBtwShots = startTimeBtwShots;
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
 
-        Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
+            //Part 10
+            var fireE = Instantiate(fireEffect, spanw.position, transform.rotation, transform);
+        }
     }
 }
  
