@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject projectile;
-    public GameObject muzzle;
     public Transform[] spawnPos;
     private float timeBtwShots;
     public float startTimeBtwShots;
@@ -13,14 +12,8 @@ public class Weapon : MonoBehaviour
     public int minDamage = 6;
     public int maxDamage = 16;
 
-    // Effect Part 10
-    public GameObject fireEffect;
-
     public WeaponManager weaponManager;
     public Transform calculatePoint;
-
-   
-
     private void Start()
     {
         weaponManager = FindObjectOfType<WeaponManager>();
@@ -58,7 +51,6 @@ public class Weapon : MonoBehaviour
         // For is for auto fire part
         foreach (Transform spanw in spawnPos)
         {
-            Instantiate(muzzle, spanw.position, transform.rotation, transform);
             var bullet = Instantiate(projectile, spanw.position, Quaternion.identity);
             Bullet bulletC = bullet.GetComponent<Bullet>();
             bulletC.minDamage = minDamage;
@@ -67,9 +59,6 @@ public class Weapon : MonoBehaviour
             timeBtwShots = startTimeBtwShots;
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
-
-            //Part 10
-            var fireE = Instantiate(fireEffect, spanw.position, transform.rotation, transform);
         }
     }
 }

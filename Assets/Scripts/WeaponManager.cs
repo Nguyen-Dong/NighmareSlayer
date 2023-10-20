@@ -35,7 +35,11 @@ public class WeaponManager : MonoBehaviour
 
     public Transform FindNearestEnemy(Vector2 weaponPos)
     {
-        if (Enemies != null && Enemies.Count <= 0) return null;
+        if (Enemies != null && Enemies.Count <= 0)
+        {
+            return null;
+        }
+
         Transform nearestEnemy = Enemies[0];
         foreach (Transform enemy in Enemies)
         {

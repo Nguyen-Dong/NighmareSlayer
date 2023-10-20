@@ -8,8 +8,13 @@ public class PlayerExp : MonoBehaviour
     int currentExp = 0;
     int currentLevel = 1;
     int requireExp = 30;
-
+    CanvasGroup group;
     public GameObject levelUpPanel;
+
+    private void Start()
+    {
+        group = levelUpPanel.GetComponent<CanvasGroup>();
+    }
 
     // Level + exp
     public void UpdateExperience(int addExp)
@@ -29,7 +34,7 @@ public class PlayerExp : MonoBehaviour
 
     public void CloseLevelUpPanel()
     {
-        CanvasGroup group = levelUpPanel.GetComponent<CanvasGroup>();
+        Debug.Log("close");
         group.alpha = 0;
         group.blocksRaycasts = false;
         group.interactable = false;
@@ -38,7 +43,7 @@ public class PlayerExp : MonoBehaviour
 
     public void OpenLevelUpPanel()
     {
-        CanvasGroup group = levelUpPanel.GetComponent<CanvasGroup>();
+        Debug.Log("open");
         group.alpha = 1;
         group.blocksRaycasts = true;
         group.interactable = true;

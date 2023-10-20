@@ -3,9 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class MENU : MonoBehaviour
 {
+    
     public void ChoiMoi()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
     }
 
     public void ThoatMenu()
@@ -16,5 +22,8 @@ public class MENU : MonoBehaviour
     {
         Application.Quit();
     }
-
+    public void ChooseChar()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

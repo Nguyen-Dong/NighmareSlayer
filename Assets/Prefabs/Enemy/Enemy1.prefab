@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2339109860105091894}
   - component: {fileID: 6989491029045788590}
   - component: {fileID: 786523312870880361}
+  - component: {fileID: 4999350013446284028}
+  - component: {fileID: 4306736197291062717}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -120,8 +122,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  ChaseSpeed: 4.5
+  ChaseSpeed: 3
   Range: 100
+  minDamage: 2
+  maxDamage: 4
+--- !u!114 &4999350013446284028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247687259080575700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fdecf8edc1d9484ea7b3c19a1bfb9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 14
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  safeTimeDuration: 0
+  isDead: 0
+  camShake: 0
+--- !u!114 &4306736197291062717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247687259080575700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ab18bea9b50c0449ea1bec557caad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damPopUp: {fileID: 7299443198911870561, guid: 60d8c5b8b357c614983107221ed30ba9, type: 3}
 --- !u!1 &3643719207026634339
 GameObject:
   m_ObjectHideFlags: 0

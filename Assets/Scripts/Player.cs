@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public Vector3 moveInput;
 
     public GameObject damPopUp;
-
+    public LosePanel losePanel;
     private void Start()
     {
         animator = characterSR.GetComponent<Animator>();
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         }
         if (GetComponent<Health>().isDead)
         {
-            //losePanel.Show();
+            losePanel.Show();
         }
     }
 }
