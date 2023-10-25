@@ -34,7 +34,6 @@ public class PlayerExp : MonoBehaviour
 
     public void CloseLevelUpPanel()
     {
-        Debug.Log("close");
         group.alpha = 0;
         group.blocksRaycasts = false;
         group.interactable = false;
@@ -43,7 +42,6 @@ public class PlayerExp : MonoBehaviour
 
     public void OpenLevelUpPanel()
     {
-        Debug.Log("open");
         group.alpha = 1;
         group.blocksRaycasts = true;
         group.interactable = true;
